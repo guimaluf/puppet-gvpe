@@ -1,0 +1,14 @@
+{
+  "name": "puppet-gvpe",
+  "version": "0.1.0",
+  "author": "guimaluf",
+  "summary": "GNU-VPE module for puppet to pnp vpn network",
+  "license": "Apache 2.0",
+  "source": "https://github.com/guimaluf/puppet-gvpe",
+  "project_page": "https://github.com/guimaluf/puppet-gvpe",
+  "issues_url": "https://github.com/guimaluf/puppet-gvpe/issues",
+  "dependencies": [
+    {"name":"puppetlabs-stdlib","version_requirement":">= 1.0.0"}
+  ]
+}
+
