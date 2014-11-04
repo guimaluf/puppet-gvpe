@@ -34,5 +34,6 @@
 # Copyright 2014 Guilherme Maluf Balzana, <guimalufb@gmail.com>
 #
 class gvpe {
-  class {'gvpe::install': }
+
+
 }
