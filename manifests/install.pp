@@ -7,9 +7,13 @@
 # Copyright 2014 Guilherme Maluf Balzana, <guimalufb@gmail.com>
 #
 class gvpe::install inherits gvpe::params {
-  if $install_from_ppa {
+  if $::gvpe::params::install_from_ppa {
+    include apt::update
+
     apt::ppa{ 'ppa:guimalufb/gvpe': }
     Apt::Ppa['ppa:guimalufb/gvpe'] -> Package['gvpe']
+
+    Exec['apt_update'] -> Package<||>
   }
 
   package { 'gvpe':
