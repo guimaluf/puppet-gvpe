@@ -1,1 +1,1 @@
---format s --colour --backtrace
+--format doc --color --deprecation-out /tmp/deprecation.out
