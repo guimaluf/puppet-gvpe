@@ -7,6 +7,7 @@
 # Copyright 2014 Guilherme Maluf Balzana, <guimalufb@gmail.com>
 #
 class gvpe::install inherits gvpe::params {
+
   if $::gvpe::params::install_from_ppa {
     include apt::update
 
