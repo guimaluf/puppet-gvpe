@@ -17,7 +17,7 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
   config.vm.provision :puppet do |puppet|
     puppet.manifests_path = "vagrant"
     puppet.manifest_file  = "base.pp"
-    puppet.module_path = "../"
+    puppet.module_path = ["../","spec/fixtures/modules/"]
     puppet.options = "--verbose --debug"
   end
 end
