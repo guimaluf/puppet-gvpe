@@ -6,7 +6,11 @@ describe 'gvpe::install' do
     :osfamily           => 'Debian',
     :lsbdistid          => 'Ubuntu',
     :operatingsystem    => 'Ubuntu',
-  }
+    }
+  end
+
+  let :facts do
+    default_facts
   end
 
   it { should contain_class('gvpe::params') }
@@ -14,14 +18,14 @@ describe 'gvpe::install' do
   it { should contain_file('/etc/gvpe').with_ensure('directory') }
 
   context 'on Ubuntu Precise' do
-    let(:facts) do
+    let :facts do
       default_facts.merge({
         :lsbdistrelease  => '12.04.5',
         :lsbdistcodename => 'precise',
       })
     end
     it { should contain_class('gvpe::params') }
-    it { should contain_class('apt::update') }
+    it { should contain_class('apt') }
     it { should contain_apt__ppa('ppa:guimalufb/gvpe').that_comes_before('Package[gvpe]') }
   end
 end

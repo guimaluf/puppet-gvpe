@@ -9,12 +9,9 @@
 class gvpe::install inherits gvpe::params {
 
   if $::gvpe::params::install_from_ppa {
-    include apt::update
-
+    include apt
     apt::ppa{ 'ppa:guimalufb/gvpe': }
     Apt::Ppa['ppa:guimalufb/gvpe'] -> Package['gvpe']
-
-    Exec['apt_update'] -> Package<||>
   }
 
   package { 'gvpe':
