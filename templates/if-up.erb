@@ -1,0 +1,5 @@
+#!/bin/sh
+<% net_prefix = @vpn_network[/(.*\.){3}/] %>
+ip link set $IFNAME address $MAC mtu $MTU up
+ip addr add <%= net_prefix %>$NODEID dev $IFNAME
+ip route add <%= @vpn_network %> dev $IFNAME

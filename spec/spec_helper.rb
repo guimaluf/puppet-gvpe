@@ -9,5 +9,6 @@ RSpec.configure do |c|
     :osfamily           => 'Debian',
     :lsbdistid          => 'Ubuntu',
     :operatingsystem    => 'Ubuntu',
+    :concat_basedir     => '/var/lib/puppet/concat',
   }
 end
