@@ -2,24 +2,17 @@ require 'spec_helper'
 
 describe 'gvpe::install' do
 
-  let :default_facts do {
-    :osfamily           => 'Debian',
-    :lsbdistid          => 'Ubuntu',
-    :operatingsystem    => 'Ubuntu',
-    }
-  end
+  it { should create_class('gvpe::install') }
 
-  let :facts do
-    default_facts
+  context 'with defaults for all parameters' do
+    it { should contain_class('gvpe::params') }
+    it { should contain_package('gvpe') }
+    it { should contain_file('/etc/gvpe').with_ensure('directory') }
   end
-
-  it { should contain_class('gvpe::params') }
-  it { should contain_package('gvpe') }
-  it { should contain_file('/etc/gvpe').with_ensure('directory') }
 
   context 'on Ubuntu Precise' do
     let :facts do
-      default_facts.merge({
+      RSpec.configuration.default_facts.merge({
         :lsbdistrelease  => '12.04.5',
         :lsbdistcodename => 'precise',
       })
