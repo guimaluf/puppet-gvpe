@@ -79,8 +79,8 @@ class gvpe::config (
   }
 
   concat::fragment { 'gvpe.conf.header':
-    content => template('gvpe/gvpe.conf.erb'),
     target  => '/etc/gvpe/gvpe.conf',
+    content => template('gvpe/gvpe.conf.erb'),
     order   => 01,
   }
 
