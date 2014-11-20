@@ -11,7 +11,7 @@
 # [*ifname*]
 #   Sets the tun interface name to the given name.
 #   Default: tun0
-# [*loglevel*]
+# [*log_level*]
 #   Set the logging level. Connection established messages are logged
 #   at level *info*, notable errors are logged with *error*
 #   Default: info
@@ -62,7 +62,7 @@ class gvpe::config (
   $mtu          = $::gvpe::params::mtu,
   $ifname       = $::gvpe::params::ifname,
   $ifpersist    = $::gvpe::params::ifpersist,
-  $loglevel     = $::gvpe::params::loglevel,
+  $log_level     = $::gvpe::params::log_level,
   $udp_port     = $::gvpe::params::udp_port,
   $tcp_port     = $::gvpe::params::tcp_port,
   $enable_udp   = $::gvpe::params::enable_udp,

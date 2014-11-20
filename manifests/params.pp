@@ -10,7 +10,7 @@ class gvpe::params {
           $install_from_ppa = ( $::lsbdistcodename == 'precise' )
           $mtu              = 1500
           $ifname           = 'tun0'
-          $loglevel         = 'info'
+          $log_level         = 'info'
           $udp_port         = 655
           $tcp_port         = 655
           $enable_udp       = false

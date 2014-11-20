@@ -9,7 +9,7 @@ define gvpe::node (
     require => Exec['generate rsa hostkey'],
     owner   => 'root',
     group   => 'root',
-    mode    => '600',
+    mode    => '0600',
   }
 
   exec { 'generate rsa hostkey':

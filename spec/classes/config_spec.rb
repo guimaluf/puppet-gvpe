@@ -11,7 +11,7 @@ describe 'gvpe::config' do
                  .with_order('01')\
                  .with_content(/mtu = 1500/)\
                  .with_content(/ifname = tun0/)\
-                 .with_content(/loglevel = info/)\
+                 .with_content(/log_level = info/)\
                  .with_content(/udp-port = 655/)\
                  .with_content(/tcp-port = 655/)\
                  .with_content(/enable-udp = false/)\
@@ -27,7 +27,7 @@ describe 'gvpe::config' do
     let :params do {
       :mtu          => '1492',
       :ifname       => 'vpe0',
-      :loglevel     => 'error',
+      :log_level     => 'error',
       :udp_port     => '6550',
       :tcp_port     => '6550',
       :enable_udp   => 'true',
@@ -41,7 +41,7 @@ describe 'gvpe::config' do
                  .with_order('01')\
                  .with_content(/mtu = 1492/)\
                  .with_content(/ifname = vpe0/)\
-                 .with_content(/loglevel = error/)\
+                 .with_content(/log_level = error/)\
                  .with_content(/udp-port = 6550/)\
                  .with_content(/tcp-port = 6550/)\
                  .with_content(/enable-udp = true/)\
