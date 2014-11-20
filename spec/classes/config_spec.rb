@@ -20,6 +20,7 @@ describe 'gvpe::config' do
     end
     it { should contain_file('/etc/gvpe/if-up').with_content(/192.168.1.\$NODEID/) }
     it { should contain_file('/etc/gvpe/if-up').with_content(/192.168.1.0\/24/) }
+    it { should contain_file('/etc/gvpe/pubkeys').with_ensure('directory') }
   end
 
   context 'with non-defaults parameters' do

@@ -8,3 +8,5 @@ stage { 'pos': }
 Stage['pre'] -> Stage['main'] -> Stage['pos']
 
 class {'gvpe':}
+
+gvpe::node {"$::hostname":}
