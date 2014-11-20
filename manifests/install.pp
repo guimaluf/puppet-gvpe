@@ -1,6 +1,7 @@
-# == Class: gvpe
+# == Class: gvpe::install
 #
-# This module install configure gvpe service, generate nodes certificates and config files
+# This module install the gvpe package.
+# PPA is configured cause gvpe is outdated on Precise repository
 #
 # === Copyright
 #
