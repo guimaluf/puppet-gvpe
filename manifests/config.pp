@@ -61,7 +61,7 @@ class gvpe::config (
   $vpn_network  = $::gvpe::params::vpn_network,
 ) inherits gvpe::params {
 
-  file { '/etc/gvpe/pubkeys':
+  file { '/etc/gvpe/pubkey':
     ensure => directory,
     owner  => 'root',
     group  => 'root',

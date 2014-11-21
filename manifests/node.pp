@@ -46,8 +46,8 @@ define gvpe::node (
     provider => 'shell',
   }
 
-  @@file { "/etc/gvpe/pubkeys/${node}":
-    content => "${::gvpe_pubkey}"
+  @@file { "/etc/gvpe/pubkey/${node}":
+    content => "${::gvpe_pubkey}",
     require => Exec['generate rsa hostkey'],
     tag     => 'pubkeys',
   }

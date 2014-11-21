@@ -11,7 +11,7 @@ describe 'gvpe::config' do
                  .with_order('01')\
                  .with_content(/mtu = 1500/)\
                  .with_content(/ifname = tun0/)\
-                 .with_content(/log_level = info/)\
+                 .with_content(/loglevel = info/)\
                  .with_content(/udp-port = 655/)\
                  .with_content(/tcp-port = 655/)\
                  .with_content(/enable-udp = false/)\
@@ -20,7 +20,7 @@ describe 'gvpe::config' do
     end
     it { should contain_file('/etc/gvpe/if-up').with_content(/192.168.1.\$NODEID/) }
     it { should contain_file('/etc/gvpe/if-up').with_content(/192.168.1.0\/24/) }
-    it { should contain_file('/etc/gvpe/pubkeys').with_ensure('directory') }
+    it { should contain_file('/etc/gvpe/pubkey').with_ensure('directory') }
   end
 
   context 'with non-defaults parameters' do
@@ -41,7 +41,7 @@ describe 'gvpe::config' do
                  .with_order('01')\
                  .with_content(/mtu = 1492/)\
                  .with_content(/ifname = vpe0/)\
-                 .with_content(/log_level = error/)\
+                 .with_content(/loglevel = error/)\
                  .with_content(/udp-port = 6550/)\
                  .with_content(/tcp-port = 6550/)\
                  .with_content(/enable-udp = true/)\
