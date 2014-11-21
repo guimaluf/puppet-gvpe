@@ -51,7 +51,7 @@ class gvpe::config (
   $mtu          = $::gvpe::params::mtu,
   $ifname       = $::gvpe::params::ifname,
   $ifpersist    = $::gvpe::params::ifpersist,
-  $log_level     = $::gvpe::params::log_level,
+  $log_level    = $::gvpe::params::log_level,
   $udp_port     = $::gvpe::params::udp_port,
   $tcp_port     = $::gvpe::params::tcp_port,
   $enable_udp   = $::gvpe::params::enable_udp,

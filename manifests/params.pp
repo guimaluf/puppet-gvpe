@@ -7,10 +7,10 @@ class gvpe::params {
     'Debian': { # Debian/Ubuntu
       case $::lsbdistid {
         'Ubuntu': {
-          $install_from_ppa = ( $::lsbdistcodename == 'precise' )
+          $install_from_ppa = ($::lsbdistcodename == 'precise')
           $mtu              = 1500
           $ifname           = 'tun0'
-          $log_level         = 'info'
+          $log_level        = 'info'
           $udp_port         = 655
           $tcp_port         = 655
           $enable_udp       = false

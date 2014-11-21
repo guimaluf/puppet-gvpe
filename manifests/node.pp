@@ -11,12 +11,11 @@
 #   A nickname which introduces a node section. The nickname is
 #   used to select the right configuration section and is passed as an argument
 #   to the gvpe daemon.
-#   Default: $name or $title
+#   Default: $::hostname
 # [*hostname*]
 #   Forces the address of this node to be set to the given DNS hostname or IP
 #   address.
 #   Default: $::ipaddress
-#   Example: $::hostname may be used
 # [*rsa_key_size*]
 #   Size of the rsa private key
 #   Default: 1280
@@ -27,7 +26,7 @@
 #
 define gvpe::node (
   $rsa_key_size = 1280,
-  $node         = $name,
+  $node         = $::hostname,
   $hostname     = $::ipaddress,
 ) {
   include gvpe::config
@@ -59,7 +58,10 @@ define gvpe::node (
     content => template('gvpe/node-conf.erb'),
     order   => 99,
     tag     => 'node-conf',
+    notify  => Service['gvpe'],
   }
 
   Concat::Fragment <<| tag ==  'node-conf' |>>
+
+  include gvpe::service
 }
