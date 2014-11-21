@@ -2,6 +2,8 @@
 #
 # This define creates rsa key pair, include node definition on all gvpe.conf and
 # retrieve pubkeys from nodes.
+# Pubkey in each node is get as a custom fact and this fact is the content
+# of an exported file.
 #
 # === Parameters
 #
@@ -44,21 +46,20 @@ define gvpe::node (
     provider => 'shell',
   }
 
-  file { "/etc/gvpe/pubkeys/${node}":
-    require => Exec['generate rsa pubkey'],
+  @@file { "/etc/gvpe/pubkeys/${node}":
+    content => "${::gvpe_pubkey}"
+    require => Exec['generate rsa hostkey'],
+    tag     => 'pubkeys',
   }
 
-  exec { 'generate rsa pubkey':
-    command  => "openssl rsa -in /etc/gvpe/hostkey -pubout -out /etc/gvpe/pubkeys/${node}",
-    cwd      => '/etc/gvpe/pubkeys',
-    creates  => "/etc/gvpe/pubkeys/${node}",
-    provider => 'shell',
-    require  => [File['/etc/gvpe/pubkeys'], File['/etc/gvpe/hostkey']],
-  }
+  File <<| tag == 'pubkeys' |>>
 
-  concat::fragment { "${node}.node-conf":
+  @@concat::fragment { "${node}.node-conf":
     target  => '/etc/gvpe/gvpe.conf',
     content => template('gvpe/node-conf.erb'),
     order   => 99,
+    tag     => 'node-conf',
   }
+
+  Concat::Fragment <<| tag ==  'node-conf' |>>
 }

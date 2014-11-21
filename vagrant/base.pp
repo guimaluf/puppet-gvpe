@@ -7,6 +7,8 @@ stage { 'pos': }
 
 Stage['pre'] -> Stage['main'] -> Stage['pos']
 
-class {'gvpe':}
+class { 'puppetdb': }
+class { 'puppetdb::master::config': }
 
+include gvpe
 gvpe::node {"$::hostname":}
