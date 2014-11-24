@@ -1,11 +1,6 @@
 require 'spec_helper'
 
 describe 'gvpe::service' do
-  let :facts do
-    RSpec.configuration.default_facts.merge({
-      :hostname   => 'test_node',
-    })
-  end
 
  it { should create_class('gvpe::service') }
  it do should contain_service('gvpe')\
