@@ -49,6 +49,7 @@ define gvpe::node (
     content => "${::gvpe_pubkey}",
     require => Exec['generate rsa hostkey'],
     tag     => 'pubkeys',
+    notify  => Service['gvpe'],
   }
 
   File <<| tag == 'pubkeys' |>>
@@ -58,7 +59,6 @@ define gvpe::node (
     content => template('gvpe/node-conf.erb'),
     order   => 99,
     tag     => 'node-conf',
-    notify  => Service['gvpe'],
   }
 
   Concat::Fragment <<| tag ==  'node-conf' |>>

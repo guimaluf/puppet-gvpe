@@ -10,14 +10,17 @@
 #
 # Copyright 2014 Guilherme Maluf Balzana, <guimalufb@gmail.com>
 #
-class gvpe::service inherits gvpe::params {
-  service {'gvpe':
-    ensure  => running,
-    enable  => true,
-    binary  => "/usr/sbin/gvpe -L $::hostname",
+class gvpe::service {
+
+  service { 'gvpe':
+    ensure    => running,
+    enable    => true,
+    provider  => 'base',
+    binary    => "/usr/sbin/gvpe -L $::hostname",
+    require   => Class['gvpe::install'],
   }
 
-  exec {'retry connect to all nodes':
+  exec { 'retry connect to all nodes':
     command     => '/usr/bin/gvpectrl -kHUP',
     provider    => 'shell',
     refreshonly => true,
