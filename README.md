@@ -20,55 +20,52 @@ The gvpe module enables you to install, configure and run a point-to-point VPN.
 ## Module Description
 
 GVPE is a suite designed to provide a virtual private network for multiple nodes
-over an untrusted network. This module will setup a GNU Virtual Private Ethernet
-across multiple nodes in a point-to-point fashion; it will install gvpe, share
-public keys and configure all nodes.
+over an untrusted network.
+
+This module will setup a GNU Virtual Private Ethernet across multiple nodes in a
+point-to-point fashion; it will install gvpe, share public keys and configure
+all nodes.
 
 ## Setup
 
-### What gvpe affects
+### What gvpe does
 
-* A list of files, packages, services, or operations that the module will alter,
-  impact, or execute on the system it's installed on.
-* This is a great place to stick any warnings.
-* Can be in list or paragraph form.
+* add **ppa:guimaluf/gvpe** repository (Ubuntu 12.04 only)
+* install **gvpe** and **gvpectrl** binaries
+* setup configuration files for gvpe
+* generate rsa key pair
+* export and collect nodes configuration and public key
+* ensure service is running(no init/upstart/systemd scripts)
 
-### Setup Requirements **OPTIONAL**
+### Setup Requirements
 
-If your module requires anything extra before setting up (pluginsync enabled,
-etc.), mention it here.
+* pluginsync
+* storeconfigs (puppetdb)
 
 ### Beginning with gvpe
 
-The very basic steps needed for a user to get the module up and running.
-
-If your most recent release breaks compatibility or requires particular steps
-for upgrading, you may wish to include an additional section here: Upgrading
-(For an example, see http://forge.puppetlabs.com/puppetlabs/firewall).
-
 ## Usage
+```puppet
+include gvpe
+```
 
-Put the classes, types, and resources for customizing, configuring, and doing
-the fancy stuff with your module here.
+**IMPORTANT**
+
+First time run it's necessary to execute `puppet agent -t` twice in order to generate rsa key pairs
+and propagate them, cause RSA public key is retrieved by `gvpe_pubkey` fact.
 
 ## Reference
 
-Here, list the classes, types, providers, facts, etc contained in your module.
-This section should include all of the under-the-hood workings of your module so
-people know what the module is touching on their system but don't need to mess
-with things. (We are working on automating this section!)
+`gvpe` will include `gvpe::install` class and `gvpe::node` resource, which includes
+`gvpe::config` and `gvpe::service` classes.
 
 ## Limitations
 
-This module it's mainly focused on Ubuntu 12.04
+This module it's mainly focused on Ubuntu 12.04.
+
+First time run it's necessary to execute `puppet agent -t` two times.
 
 ## Development
 
 This is my first module, so any suggestion or problem, please fell free to
 report or let me know.
-
-## Release Notes/Contributors/Etc **Optional**
-
-If you aren't using changelog, put your release notes here (though you should
-consider using changelog). You may also add any additional sections you feel are
-necessary or important to include here. Please use the `## ` header.
