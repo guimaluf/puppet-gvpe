@@ -11,4 +11,4 @@ class { 'puppetdb': }
 class { 'puppetdb::master::config': }
 
 include gvpe
-gvpe::node {"$::hostname":}
+gvpe::node {$::hostname:}

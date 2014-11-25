@@ -13,11 +13,11 @@
 class gvpe::service {
 
   service { 'gvpe':
-    ensure    => running,
-    enable    => true,
-    provider  => 'base',
-    binary    => "/usr/sbin/gvpe -L $::hostname",
-    require   => Class['gvpe::install'],
+    ensure   => running,
+    enable   => true,
+    provider => 'base',
+    binary   => "/usr/sbin/gvpe -L ${::hostname}",
+    require  => Class['gvpe::install'],
   }
 
   exec { 'retry connect to all nodes':
