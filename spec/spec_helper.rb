@@ -11,6 +11,6 @@ RSpec.configure do |c|
     :operatingsystem => 'Ubuntu',
     :concat_basedir  => '/var/lib/puppet/concat',
     :hostname        => 'test_node',
-    :ipaddress       => '10.0.0.1',
+    :ipaddress       => '192.168.100.101',
   }
 end

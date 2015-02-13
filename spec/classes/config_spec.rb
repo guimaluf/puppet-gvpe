@@ -18,8 +18,8 @@ describe 'gvpe::config' do
                  .with_content(/enable-tcp = false/)\
                  .with_content(/enable-rawip = true/)\
     end
-    it { should contain_file('/etc/gvpe/if-up').with_content(/192.168.1.\$NODEID/) }
-    it { should contain_file('/etc/gvpe/if-up').with_content(/192.168.1.0\/24/) }
+    it { should contain_file('/etc/gvpe/if-up').with_content(/10.168.100.101/) }
+    it { should contain_file('/etc/gvpe/if-up').with_content(/10.0.0.0\/8/) }
     it { should contain_file('/etc/gvpe/pubkey').with_ensure('directory') }
   end
 
@@ -27,13 +27,14 @@ describe 'gvpe::config' do
     let :params do {
       :mtu          => '1492',
       :ifname       => 'vpe0',
-      :log_level     => 'error',
+      :log_level    => 'error',
       :udp_port     => '6550',
       :tcp_port     => '6550',
       :enable_udp   => 'true',
       :enable_tcp   => 'true',
       :enable_rawip => 'false',
-      :vpn_network  => '10.22.9.0/16',
+      :vpn_network  => '11.22.33.0/24',
+      :vpn_ip       => '11.22.33.123',
     }end
 
     it do should contain_concat__fragment('gvpe.conf.header')\
@@ -48,7 +49,7 @@ describe 'gvpe::config' do
                  .with_content(/enable-tcp = true/)\
                  .with_content(/enable-rawip = false/)\
     end
-    it { should contain_file('/etc/gvpe/if-up').with_content(/10.22.9.\$NODEID/) }
-    it { should contain_file('/etc/gvpe/if-up').with_content(/10.22.9.0\/16/) }
+    it { should contain_file('/etc/gvpe/if-up').with_content(/11.22.33.123/) }
+    it { should contain_file('/etc/gvpe/if-up').with_content(/11.22.33.0\/24/) }
   end
 end

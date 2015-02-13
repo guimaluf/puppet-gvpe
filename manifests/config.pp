@@ -30,10 +30,14 @@
 #   Enable the RAW IPv4 transport using the ip_proto protocol
 #   Default: true
 # [*vpn_network*]
-#   VPN network address. Node address are only set in the last octet.
-#   Default: 192.168.1.0/24
-#   Example: if *vpn_network* is 10.1.0.0/16, node ip address range is 10.1.0.0
-#--> 10.1.0.255
+#   VPN network address.
+#   Default: 10.0.0.0/8
+# [*vpn_ip*]
+#   VPN IP address is built from $::ipaddress variable using the last three
+#   octets. This is done in order to have a single fixed VPN IP address to each
+#   node.
+#   Example: ipaddress = 192.168.100.101
+#   Default: vpn_ip = 10.168.100.101
 #
 # === Examples
 #
@@ -59,6 +63,7 @@ class gvpe::config (
   $enable_rawip = $::gvpe::params::enable_rawip,
   $enable_icmp  = $::gvpe::params::enable_icmp,
   $vpn_network  = $::gvpe::params::vpn_network,
+  $vpn_ip       = $::gvpe::params::vpn_ip,
 ) inherits gvpe::params {
 
   file { '/etc/gvpe/pubkey':

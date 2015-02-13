@@ -16,7 +16,12 @@ class gvpe::params {
           $enable_udp       = false
           $enable_tcp       = false
           $enable_rawip     = true
-          $vpn_network      = '192.168.1.0/24'
+          $vpn_network      = '10.0.0.0/8'
+          $vpn_ip           = regsubst(
+                                $::ipaddress,
+                                '^([0-9]+)[.]([0-9]+)[.]([0-9]+)[.]([0-9]+)$',
+                                '10.\2.\3.\4'
+                              )
         }
 
         default: {

@@ -1,6 +1,6 @@
 {
   "name": "guimaluf-gvpe",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "author": "guimaluf",
   "summary": "GNU-VPE module for puppet to pnp vpn network",
   "license": "Apache Version 2.0",
