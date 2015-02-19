@@ -89,5 +89,6 @@ class gvpe::config (
     owner   => 'root',
     group   => 'root',
     mode    => '0774',
+    notify  => Service['gvpe'],
   }
 }
