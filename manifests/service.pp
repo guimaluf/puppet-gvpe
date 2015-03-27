@@ -16,14 +16,9 @@ class gvpe::service {
     ensure   => running,
     enable   => true,
     provider => 'base',
-    binary   => "/usr/sbin/gvpe -L ${::hostname}",
+    start    => "/usr/sbin/gvpe -L ${::hostname}",
+    stop     => '/usr/bin/gvpectrl -kKILL',
+    status   => '/usr/bin/pgrep gvpe',
     require  => Class['gvpe::install'],
   }
-
-  exec { 'retry connect to all nodes':
-    command     => '/usr/bin/gvpectrl -kHUP',
-    provider    => 'shell',
-    refreshonly => true,
-  }
-
 }
