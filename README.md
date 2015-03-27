@@ -49,6 +49,36 @@ all nodes.
 include gvpe
 ```
 
+### Changing the VPN Network
+By default VPN network address is `10.0.0.0/8` and VPN IP address is built from
+$::ipaddress variable using the last three octets. This is done in order to have
+a single fixed VPN IP address to each node.
+```puppet
+vpn_network => '10.0.0.0/8',
+vpn_ip      => regsubst(
+    $::ipaddress,
+    '^([0-9]+)[.]([0-9]+)[.]([0-9]+)[.]([0-9]+)$',
+    '10.\2.\3.\4'
+    )
+```
+
+
+If you want to change VPN network address, change `vpn_network` a `vpn_ip`
+```puppet
+class { 'gvpe::config':
+  vpn_network => '172.16.0.0/12',
+  vpn_ip      => regsubst(
+      $::ipaddress,
+      '^([0-9]+)[.]([0-9]+)[.]([0-9]+)[.]([0-9]+)$',
+      '172.16.\3.\4'
+      )
+}
+include gvpe
+```
+
+`vpn_ip` in the example above is using the two last octets(`\3.\4`) of `$::ipaddress`
+
+
 **IMPORTANT**
 
 First time run it's necessary to execute `puppet agent -t` twice in order to generate rsa key pairs
